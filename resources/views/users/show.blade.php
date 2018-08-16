@@ -10,6 +10,7 @@
                 <div class="panel-body">
                     <img class="media-object img-rounded img-responsive" src="{{ Gravatar::src($user->email, 500) }}" alt="">
                 </div>
+                @include('user_follow.follow_button', ['user' => $user])
             </div>
         </aside>
         <div class="col-xs-8">

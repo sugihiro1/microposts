@@ -32,7 +32,7 @@ class UsersController extends Controller
         return view('users.show', $data);
     }
     
-        public function followings($id)
+    public function followings($id)
     {
         $user = User::find($id);
         $followings = $user->followings()->paginate(10);
@@ -60,6 +60,38 @@ class UsersController extends Controller
         $data += $this->counts($user);
 
         return view('users.followers', $data);
+    }
+    
+    // お気に入りリスト
+    public function favorings($id)
+    {
+        $user = User::find($id);
+        $favorings = $user->favorings()->paginate(10);
+
+        $data = [
+            'user' => $user,
+            'users' => $favorings,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.favorings', $data);
+    }
+
+     // お気に入られリスト
+    public function favorers($id)
+    {
+        $user = User::find($id);
+        $favorers = $user->favorers()->paginate(10);
+
+        $data = [
+            'user' => $user,
+            'users' => $favorers,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.favorers', $data);
     }
 }
 

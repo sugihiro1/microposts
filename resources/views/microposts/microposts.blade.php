@@ -15,7 +15,6 @@
             
             <div>
                 <!-- Favorite用に追加 -->
-                <p><?php echo $micropost->id ?></p>
                 @include('micropost_favor.micropost_favor_button', ['micrpost' => $micropost->id]) 
 
                 <!-- Deleteボタン -->

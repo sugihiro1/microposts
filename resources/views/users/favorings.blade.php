@@ -13,6 +13,7 @@
             </div>
             @include('user_follow.follow_button', ['user' => $user])
         </aside>
+
         <div class="col-xs-8">
             <ul class="nav nav-tabs nav-justified">
                 <li role="presentation" class="{{ Request::is('users/' . $user->id) ? 'active' : '' }}"><a href="{{ route('users.show', ['id' => $user->id]) }}">TimeLine <span class="badge">{{ $count_microposts }}</span></a></li>
@@ -21,8 +22,8 @@
                 <!-- Favorites のため追加 -->
                <li role="presentation" class="{{ Request::is('users/*/favorings') ? 'active' : '' }}"><a href="{{ route('users.favorings', ['id' => $user->id]) }}">Favorites <span class="badge">{{ $count_favorings }}</span></a></li>  
             </ul>
-            <?php $show_favor_button = true; ?>
-            @include('users.users', ['users' => $users, 'show_favor_button'=> $show_favor_button])
+            <?php $show_favor_button = false; ?>
+            @include('microposts.microposts', ['microposts' => $microposts, 'show_favor_button'=> $show_favor_button])
         </div>
     </div>
 @endsection

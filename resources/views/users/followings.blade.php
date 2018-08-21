@@ -21,8 +21,8 @@
                 <!-- Favorites のため追加 -->
                <li role="presentation" class="{{ Request::is('users/*/favorings') ? 'active' : '' }}"><a href="{{ route('users.favorings', ['id' => $user->id]) }}">Favorites <span class="badge">{{ $count_favorings }}</span></a></li>  
             </ul>
-            <?php $show_favor_button = true; ?>
-            @include('users.users', ['users' => $users, 'show_favor_button'=> $show_favor_button])
+            <?php $show_favor_button = false; ?>
+             @include('users.users', ['users' => $users, 'show_favor_button'=> $show_favor_button])
         </div>
     </div>
 @endsection

@@ -11,11 +11,9 @@
             </div>
             <div>
                 <p>{!! link_to_route('users.show', 'View profile', ['id' => $user->id]) !!}</p>
-                <!-- Favorites のため追加 -->
+                <!-- User favorites のため追加 -->
                 <div>
-                     @if ($show_favor_button)
-                        @include('user_favor.favor_button', ['user' => $user])  
-                    @endif
+                   
                 </div>
             </div>
         </div>

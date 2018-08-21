@@ -15,12 +15,13 @@
             </aside>
             <div class="col-xs-8">
                 @if (count($microposts) > 0)
-                    @include('microposts.microposts', ['microposts' => $microposts])
+<?php dd('welcome'); ?>
+<!--                    @include('microposts.microposts', ['microposts' => $microposts])  -->
                 @endif
             </div>
         </div>
     @else
-    
+
         <div class="center jumbotron">
             <div class="text-center">
                 <h1>Welcome to the Microposts</h1>

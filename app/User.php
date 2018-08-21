@@ -95,49 +95,49 @@ class User extends Authenticatable
     // Favorites 
     public function favorings()
     {
-        return $this->belongsToMany(User::class, 'user_favor', 'user_id', 'favor_id')->withTimestamps();
+//dd($this->belongsToMany(Micropost::class, 'user_favor', 'user_id', 'favor_id')->withTimestamps());
+        return $this->belongsToMany(Micropost::class, 'user_favor', 'user_id', 'favor_id')->withTimestamps();
+ 
     }
 
-    public function favorers()
+
+    public function favor($micropostId)
     {
-        return $this->belongsToMany(User::class, 'user_follow', 'favor_id', 'user_id')->withTimestamps();
-    }
-    
-    public function favor($userId)
-    {
-        // 既にフォローしているかの確認
-        $exist = $this->is_favoring($userId);
+
+        // 既にお気に入りしているかの確認
+        $exist = $this->is_favoring($micropostId);
         // 自分自身ではないかの確認
-        $its_me = $this->id == $userId;
+        // $its_me = $this->id == $userId;
     
-        if ($exist || $its_me) {
-            // 既にフォローしていれば何もしない
+        if ($exist) {
+            // 既にお気に入りしていれば何もしない
             return false;
         } else {
-            // 未フォローであればフォローする
-            $this->favorings()->attach($userId);
+            // 未お気に入りであればお気に入りする
+            $this->favorings()->attach($micropostId);
             return true;
         }
     }
 
-    public function unfavor($userId)
+    public function unfavor($micropostId)
     {
-        // 既にフォローしているかの確認
-        $exist = $this->is_favoring($userId);
+        // 既にお気に入りしているかの確認
+        $exist = $this->is_favoring($micropostId);
         // 自分自身ではないかの確認
-        $its_me = $this->id == $userId;
+        // $its_me = $this->id == $userId;
     
-        if ($exist && !$its_me) {
-            // 既にフォローしていればフォローを外す
-            $this->favorings()->detach($userId);
+        if ($exist) {
+            // 既にお気に入りしていればお気に入りを外す
+            $this->favorings()->detach($micropostId);
             return true;
         } else {
-            // 未フォローであれば何もしない
+            // 未お気に入りであれば何もしない
             return false;
         }
     }
 
-    public function is_favoring($userId) {
-        return $this->favorings()->where('favor_id', $userId)->exists();
+    public function is_favoring($micropostId) {
+//dd($micropostId);
+        return $this->favorings()->where('favor_id', $micropostId)->exists();
     }
 }
